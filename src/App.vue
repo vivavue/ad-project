@@ -60,4 +60,15 @@ export default {
   left: 50%;
   transform: translateX(-50%);
 }
+
+.car-link {
+  position: absolute;
+  left: 50%;
+  bottom: 50px;
+  transform: translateX(-50%);
+  background: #000;
+  opacity: .5;
+  padding: 5px 15px;
+  border-radius: 5px 5px 0 0;
+}
 </style>
