@@ -30,7 +30,9 @@
     </v-app-bar>
 
     <v-content>
-      <router-view />
+      <transition name="router-anim" enter-active-class="animated lightSpeedIn" leave-active-class="animated lightSpeedOut">
+        <router-view />
+      </transition>
     </v-content>
   </v-app>
 </template>
@@ -48,3 +50,14 @@ export default {
   })
 }
 </script>
+<style lang="scss">
+.wrapper {
+  filter: blur(0);
+}
+
+.page {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+}
+</style>

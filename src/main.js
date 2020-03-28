@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 import vuetify from './plugins/vuetify'
+import animate from 'animate.css'
+
+Vue.use(animate)
 
 Vue.config.productionTip = false
 
