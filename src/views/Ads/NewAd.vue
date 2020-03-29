@@ -75,7 +75,7 @@ export default {
           imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
         }
 
-        console.log(ad)
+        this.$store.dispatch('createAd', ad)
       }
     }
   }
