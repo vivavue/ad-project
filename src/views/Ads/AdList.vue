@@ -3,7 +3,7 @@
     <v-container class="page" grid-list-lg>
       <h1 class="text-secondary mb-3">Ad List</h1>
       <v-layout row>
-        <v-flex xs12 sm6 v-for="ad in ads" :key="ad.id">
+        <v-flex xs12 sm6 v-for="ad in myAds" :key="ad.id">
           <v-card class="elevation-10 mb-5">
             <v-container>
               <v-layout>
@@ -30,38 +30,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  data: () => ({
-    ads: [
-      {
-        id: '1231',
-        title: 'First ad',
-        description: 'First description',
-        promo: false,
-        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
-      },
-      {
-        id: '1232',
-        title: 'Second ad',
-        description: 'Second description',
-        promo: true,
-        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
-      },
-      {
-        id: '1233',
-        title: 'Third ad',
-        description: 'Third description',
-        promo: true,
-        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
-      },
-      {
-        id: '1234',
-        title: 'Forth ad',
-        description: 'Forth description',
-        promo: false,
-        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
-      }
-    ]
-  })
+  computed: mapGetters(['myAds'])
 }
 </script>

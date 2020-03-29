@@ -4,7 +4,7 @@
     <v-container>
       <v-carousel cycle show-arrows-on-hover>
         <v-carousel-item
-          v-for="ad in ads"
+          v-for="ad in promoAds"
           :key="ad.id"
           :src="ad.imageSrc"
           reverse-transition="fade-transition"
@@ -18,7 +18,7 @@
     </v-container>
     <v-container grid-list-lg>
       <v-layout row>
-        <v-flex xs12 sm6 md4 v-for="ad in ads" :key="ad.id">
+        <v-flex xs12 sm6 md4 v-for="ad in allAds" :key="ad.id">
           <v-card>
             <v-img :src="ad.imageSrc" height="200px"></v-img>
 
@@ -30,7 +30,7 @@
               <v-spacer></v-spacer>
               <v-btn text :to="`/ad/${ad.id}`">Open</v-btn>
 
-              <v-btn raised class="primary">Buy</v-btn>
+              <v-btn raised class="teal">Buy</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -41,38 +41,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
-  data: () => ({
-    ads: [
-      {
-        id: '1231',
-        title: 'First ad',
-        description: 'First description',
-        promo: false,
-        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
-      },
-      {
-        id: '1232',
-        title: 'Second ad',
-        description: 'Second description',
-        promo: true,
-        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'
-      },
-      {
-        id: '1233',
-        title: 'Third ad',
-        description: 'Third description',
-        promo: true,
-        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg'
-      },
-      {
-        id: '1234',
-        title: 'Forth ad',
-        description: 'Forth description',
-        promo: false,
-        imageSrc: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
-      }
-    ]
-  })
+  computed: mapGetters(['allAds', 'promoAds'])
 }
 </script>
