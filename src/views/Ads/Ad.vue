@@ -4,10 +4,10 @@
       <v-layout row>
         <v-flex xs12 sm10 offset-sm1>
           <v-card>
-            <v-img src="https://cdn.vuetifyjs.com/images/carousel/bird.jpg" height="300px"></v-img>
+            <v-img :src="ad.imageSrc" height="300px"></v-img>
             <v-card-text>
-              <h1 class="text--primary">lorem</h1>
-              <p>Lorem ipsum dolor sit amet.</p>
+              <h1 class="text--primary">{{ ad.title }}</h1>
+              <p>{{ ad.description }}</p>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -20,3 +20,15 @@
     </v-container>
   </div>
 </template>
+
+<script>
+export default {
+  props: ['id'],
+  computed: {
+    ad () {
+      const id = this.id
+      return this.$store.getters.adById(id)
+    }
+  }
+}
+</script>
