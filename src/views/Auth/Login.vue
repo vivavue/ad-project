@@ -33,7 +33,12 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer />
-              <v-btn color="teal" @click="onSubmit" :disabled="!valid">Login</v-btn>
+              <v-btn
+                color="teal"
+                @click="onSubmit"
+                :loading="loading"
+                :disabled="!valid || loading"
+              >Login</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -42,6 +47,7 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data: () => ({
     valid: false,
@@ -57,14 +63,20 @@ export default {
       v => v.length >= 6 || 'Password must be equal or more than 6 characters'
     ]
   }),
+  computed: mapGetters(['loading']),
   methods: {
+    ...mapActions(['loginUser']),
     onSubmit () {
       if (this.$refs.form.validate()) {
         const user = {
           password: this.password,
           email: this.email
         }
-        console.log(user)
+        this.loginUser(user)
+          .then(() => {
+            this.$router.push('/')
+          })
+          .catch(err => console.log(err))
       }
     }
   }
