@@ -32,7 +32,14 @@ fb.auth().onAuthStateChanged(() => {
       router,
       store,
       vuetify,
-      render: h => h(App)
+      render: h => h(App),
+      created () {
+        fb.auth().onAuthStateChanged(user => {
+          if (user) {
+            this.$store.dispatch('autoLoginUser', user)
+          }
+        })
+      }
     }).$mount('#app')
   }
 })
