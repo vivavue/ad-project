@@ -43,7 +43,12 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer />
-              <v-btn color="teal" @click="onSubmit" :disabled="!valid">Create account</v-btn>
+              <v-btn
+                color="teal"
+                @click="onSubmit"
+                :loading="loading"
+                :disabled="!valid || loading"
+              >Create account</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -73,6 +78,9 @@ export default {
     passwordConfirmationRule () {
       return () =>
         this.password === this.confirmPassword || 'Password must match'
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   },
   methods: {
@@ -82,7 +90,11 @@ export default {
           password: this.password,
           email: this.email
         }
-        console.log(user)
+        this.$store.dispatch('registerUser', user)
+          .then(() => {
+            this.$router.push('/')
+          })
+          .catch(err => console.log(err))
       }
     }
   }
