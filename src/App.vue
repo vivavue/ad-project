@@ -30,13 +30,32 @@
     </v-app-bar>
 
     <v-content>
-      <transition name="router-anim" enter-active-class="animated lightSpeedIn" leave-active-class="animated lightSpeedOut">
+      <transition
+        name="router-anim"
+        enter-active-class="animated lightSpeedIn"
+        leave-active-class="animated lightSpeedOut"
+      >
         <router-view />
       </transition>
     </v-content>
+
+    <template v-if="error">
+      <v-snackbar
+        :timeout="5000"
+        :multi-line="true"
+        color="error"
+        @input="closeError"
+        :value="true"
+      >
+        {{ error }}
+        <v-btn text dark @click.native="closeError">Close</v-btn>
+      </v-snackbar>
+    </template>
   </v-app>
 </template>
+
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data: () => ({
     drawer: false,
@@ -47,7 +66,14 @@ export default {
       { title: 'New Ad', icon: 'mdi-bookmark-plus', url: '/new' },
       { title: 'My Ads', icon: 'mdi-view-list', url: '/list' }
     ]
-  })
+  }),
+  computed: mapGetters(['error']),
+  methods: {
+    ...mapActions(['clearError']),
+    closeError () {
+      this.clearError()
+    }
+  }
 }
 </script>
 <style lang="scss">
@@ -67,7 +93,7 @@ export default {
   bottom: 50px;
   transform: translateX(-50%);
   background: #000;
-  opacity: .5;
+  opacity: 0.5;
   padding: 5px 15px;
   border-radius: 5px 5px 0 0;
 }
